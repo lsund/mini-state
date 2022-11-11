@@ -19,8 +19,8 @@ import           Prelude               hiding (readFile, writeFile)
 import           System.Directory      (createDirectoryIfMissing, doesFileExist)
 
 
-dbdir :: FilePath
-dbdir = "data"
+basedir :: FilePath
+basedir = "ministate"
 
 encodeText :: ToJSON a => a -> Text
 encodeText = TE.decodeUtf8 . toStrict . Aeson.encode
@@ -30,8 +30,8 @@ decodeText = (Aeson.eitherDecode . fromString) . (Char8.unpack . TE.encodeUtf8)
 
 load :: (FromJSON a, FromJSON b) => L.Loader a b c -> IO (Either String [c])
 load loader = do
-    let dbfile = dbdir ++ "/" ++ (loader ^. L.sourceFile)
-    createDirectoryIfMissing True dbdir
+    let dbfile = basedir ++ "/" ++ (loader ^. L.sourceFile)
+    createDirectoryIfMissing True basedir
     dbExists <- doesFileExist dbfile
     unless dbExists $ writeFile dbfile "[]"
     content <- readFile dbfile
@@ -42,4 +42,4 @@ load loader = do
 save :: ToJSON b => UL.Unloader a b -> [a] -> IO ()
 save unloader txs = writeFile dbfile (serializeMany txs)
   where serializeMany = encodeText . (unloader ^. UL.extractor)
-        dbfile = dbdir ++ "/" ++ (unloader ^. UL.sourceFile)
+        dbfile = basedir ++ "/" ++ (unloader ^. UL.sourceFile)
