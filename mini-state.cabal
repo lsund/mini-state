@@ -5,7 +5,7 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           mini-state
-version:        0.1.0.0
+version:        0.1.0.1
 description:    Please see the README on GitHub at <https://github.com/githubuser/mini-state#readme>
 homepage:       https://github.com/githubuser/mini-state#readme
 bug-reports:    https://github.com/githubuser/mini-state/issues
@@ -13,11 +13,9 @@ author:         Author name here
 maintainer:     example@example.com
 copyright:      2022 Author name here
 license:        BSD3
-license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
-    CHANGELOG.md
 
 source-repository head
   type: git
@@ -28,7 +26,6 @@ library
       IO.Loader
       IO.Repository
       IO.Unloader
-      Lib
   other-modules:
       Paths_mini_state
   hs-source-dirs:
