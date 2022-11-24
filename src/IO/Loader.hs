@@ -3,7 +3,7 @@
 {-# LANGUAGE RankNTypes        #-}
 {-# LANGUAGE TemplateHaskell   #-}
 
-module IO.Loader where
+module IO.Loader (Loader, sourceFile, payload, linker) where
 
 import           Lens.Micro.TH
 

@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RankNTypes        #-}
 
-module IO.Repository where
+module IO.Repository (load, save) where
 
 import           Control.Monad         (unless)
 import           Data.Aeson            (FromJSON, ToJSON)
@@ -28,7 +28,7 @@ encodeText = TE.decodeUtf8 . toStrict . Aeson.encode
 decodeText :: FromJSON a => Text -> Either String a
 decodeText = (Aeson.eitherDecode . fromString) . (Char8.unpack . TE.encodeUtf8)
 
-load :: (FromJSON a, FromJSON b) => L.Loader a b c -> IO (Either String [c])
+load :: (FromJSON b) => L.Loader a b c -> IO (Either String [c])
 load loader = do
     let dbfile = basedir ++ "/" ++ (loader ^. L.sourceFile)
     createDirectoryIfMissing True basedir

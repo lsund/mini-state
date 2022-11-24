@@ -3,7 +3,7 @@
 {-# LANGUAGE RankNTypes        #-}
 {-# LANGUAGE TemplateHaskell   #-}
 
-module IO.Unloader where
+module IO.Unloader (Unloader, sourceFile, extractor) where
 
 import Lens.Micro.TH
 
