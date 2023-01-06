@@ -2,35 +2,37 @@
 
 This is a SQL like abstraction on top of a JSON file.
 
-I use it to build haskell programs whose state is one or more list of Aeson objects.
-
+I use it to build haskell programs whose state is one or more list of Aeson
+objects.
 
 ```
 data Loader a b c = ...
 ```
 
-The loader represents how to load a "table" of type `a`, using a linker of type `a b c`.
+The loader represents how to load a "table" of type `c`, based on table `b` and
+table `a`.
 
 ```
 type Linker a b c =
 ```
 
-The linker is useful to load tables that references other tables. If your type `FullType` references on an ID in another table `SimpleType`, the linker will be used to specify which ID depending on the partial type `PartialType`.
-e.g.
+The linker represents the reference between two tables. If your type `FullType`
+references tables `SimpleType` and `PartialType`, then the type declaration
+would be:
 
 ```
 someLinker :: Linker SimpleType PartialType FullType
 ```
 
-The written out type declaration of Linker looks like
+You implement the linker by specifying how to create `FullType` based
+on the full list of `SimpleType` and a single `PartialType`. Consider the
+full type Linker:
 
 ```
 type Linker a b c = Maybe [a] -> b -> Either String c
 ```
 
-To contruct a linker, you need a list of all objects of type `SimpleType`
-(probably from your previous query), and a partial object `PartialType`
-which which references `FullType`. A minimal implementation could look like this:
+ A minimal implementation could look like this:
 
 ```
 
