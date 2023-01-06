@@ -12,12 +12,11 @@ import           Data.String           (fromString)
 import           Data.Text             (Text)
 import qualified Data.Text.Encoding    as TE
 import           Data.Text.IO          (readFile, writeFile)
-import qualified IO.Loader as L
-import qualified  IO.Unloader as UL
+import qualified IO.Loader             as L
+import qualified IO.Unloader           as UL
 import           Lens.Micro
 import           Prelude               hiding (readFile, writeFile)
 import           System.Directory      (createDirectoryIfMissing, doesFileExist)
-
 
 basedir :: FilePath
 basedir = "ministate"
