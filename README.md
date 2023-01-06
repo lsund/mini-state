@@ -15,7 +15,7 @@ The loader represents how to load a "table" of type `a`, using a linker of type 
 type Linker a b c =
 ```
 
-The linker is useful when your haskell in-memory when you have less normalized sql data. If your type `FullType` references on an ID in another table `SimpleType`, the linker will be used to specify which ID depending on the partial type `PartialType`.
+The linker is useful to load tables that references other tables. If your type `FullType` references on an ID in another table `SimpleType`, the linker will be used to specify which ID depending on the partial type `PartialType`.
 e.g.
 
 ```
